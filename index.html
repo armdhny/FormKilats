@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormulirKilat - Ubah Orderan Manual Jadi Otomatis</title>
+    
+    <!-- Meta Tags untuk SEO & Social Media -->
+    <meta name="description" content="Stop catat order manual! Buat formulir online canggih dalam 5 menit dengan FormulirKilat. Data langsung masuk Google Sheets, lengkap dengan pembayaran online. Coba gratis!">
+    <meta name="keywords" content="form builder, umkm, formulir online, google sheets, payment gateway, formulir pesanan">
+    <meta property="og:title" content="FormulirKilat - Ubah Orderan Manual Jadi Otomatis">
+    <meta property="og:description" content="Buat formulir pesanan canggih dalam 5 menit. Data langsung masuk Google Sheets, lengkap dengan pembayaran online. Sempurna untuk UMKM Indonesia.">
+    <meta property="og:image" content="https://placehold.co/1200x630/0284c7/ffffff?text=FormulirKilat">
+    <meta property="og:url" content="https://formulirkilat.id"> <!-- Ganti dengan domain Anda -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://placehold.co/32x32/0284c7/ffffff?text=FK" type="image/png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- OPTIMISASI Google Fonts: Menambahkan &display=swap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Konfigurasi Tambahan untuk Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#0284c7', // sky-600
+                        'primary-hover': '#0369a1', // sky-700
+                        'secondary': '#f0f9ff', // sky-50
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS untuk Animasi -->
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        /* OPTIMISASI: Preload gambar LCP (Largest Contentful Paint) */
+        .hero-bg {
+            background-image: url('https://placehold.co/1200x630/0284c7/ffffff?text=FormulirKilat'); /* Ganti dengan gambar hero Anda */
+        }
+    </style>
+    <link rel="preload" as="image" href="https://placehold.co/1200x630/0284c7/ffffff?text=FormulirKilat">
+</head>
+<body class="bg-white font-sans antialiased">
+    
+    <!-- ====================================================================== -->
+    <!-- [SHARED COMPONENT] - Layout                                            -->
+    <!-- Komponen ini mengatur struktur utama halaman seperti Header dan Footer -->
+    <!-- ====================================================================== -->
+
+    <!-- WCAG: Skip to Main Content Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:px-4 focus:py-3 focus:top-4 focus:left-4 bg-white text-primary rounded-md shadow-lg">
+        Lompat ke Konten Utama
+    </a>
+
+    <!-- Header & Navigasi -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-40 border-b border-gray-200 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="flex items-center space-x-2">
+                        <!-- SVG Logo (WCAG: Accessible) -->
+                        <svg class="h-8 w-auto text-primary" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo FormulirKilat">
+                           <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2ZM18 20H6V4H13V9H18V20ZM8 12H16V14H8V12ZM8 16H16V18H8V16Z"/>
+                        </svg>
+                        <span class="font-bold text-xl text-gray-800">FormulirKilat</span>
+                    </a>
+                </div>
+                <!-- Navigasi Desktop -->
+                <nav class="hidden md:flex md:items-center md:space-x-8">
+                    <a href="#fitur" class="text-gray-600 hover:text-primary font-medium">Fitur</a>
+                    <a href="#harga" class="text-gray-600 hover:text-primary font-medium">Harga</a>
+                    <a href="#testimoni" class="text-gray-600 hover:text-primary font-medium">Testimoni</a>
+                </nav>
+                <!-- Tombol CTA Desktop -->
+                <div class="hidden md:block">
+                    <a href="#" class="inline-block bg-primary text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:bg-primary-hover transition-colors duration-300">
+                        Coba Gratis Sekarang
+                    </a>
+                </div>
+                 <!-- Tombol Menu Mobile -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary" aria-label="Buka menu utama" aria-expanded="false">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#fitur" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Fitur</a>
+                <a href="#harga" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Harga</a>
+                <a href="#testimoni" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Testimoni</a>
+                <a href="#" class="block w-full text-left bg-primary text-white font-semibold px-4 py-3 rounded-lg mt-2">Coba Gratis Sekarang</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- ====================================================================== -->
+        <!-- [FEATURE] - Hero Section                                               -->
+        <!-- Fitur ini bertanggung jawab untuk menarik perhatian pengguna pertama kali. -->
+        <!-- ====================================================================== -->
+        <section class="pt-24 pb-16 sm:pt-32 sm:pb-24 bg-secondary">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="fade-in">
+                    <span class="inline-block bg-sky-200 text-primary font-semibold px-4 py-1 rounded-full text-sm mb-4">Didesain untuk UMKM Indonesia</span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight">
+                        Stop Catat Order Manual.
+                        <br>
+                        <span class="text-primary">Otomatiskan Bisnis Anda.</span>
+                    </h1>
+                    <p class="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-gray-600">
+                        Ubah pesanan berantakan dari WhatsApp menjadi data rapi di Google Sheets. Buat formulir canggih dalam 5 menit, lengkap dengan pembayaran online.
+                    </p>
+                    <div class="mt-8 flex justify-center gap-4 flex-wrap">
+                        <a href="#" class="inline-block bg-primary text-white font-bold px-8 py-4 rounded-lg shadow-xl hover:bg-primary-hover transform hover:scale-105 transition-all duration-300">
+                            Coba Gratis Sekarang →
+                        </a>
+                        <a href="#fitur" class="inline-block bg-white text-gray-700 font-bold px-8 py-4 rounded-lg shadow-xl hover:bg-gray-100 transform hover:scale-105 transition-all duration-300">
+                            Lihat Fitur
+                        </a>
+                    </div>
+                    <div class="mt-8 text-sm text-gray-600 font-medium"> <!-- OPTIMISASI: Kontras warna diperbaiki dari gray-500 ke gray-600 -->
+                        Dipercaya oleh 500+ UMKM di seluruh Indonesia
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================== -->
+        <!-- [FEATURE] - Problem/Solution Display                                   -->
+        <!-- Fitur ini menyoroti masalah pengguna dan bagaimana produk menyelesaikannya. -->
+        <!-- ====================================================================== -->
+        <section class="py-16 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                     <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Dari Manual & Berantakan, Menjadi Otomatis & Teratur</h2>
+                     <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Fokus pada produk Anda, biar kami yang urus administrasinya.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <!-- Before Card -->
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-red-800 mb-3">❌ Sebelum FormulirKilat</h3>
+                        <ul class="space-y-2 text-red-700">
+                            <li class="flex items-start"><span class="mr-2 mt-1">😵</span><span>Order menumpuk & rawan salah catat di WhatsApp.</span></li>
+                            <li class="flex items-start"><span class="mr-2 mt-1">🕰️</span><span>Habis waktu berjam-jam untuk rekap manual.</span></li>
+                            <li class="flex items-start"><span class="mr-2 mt-1">💸</span><span>Sulit cek mutasi transfer satu per satu.</span></li>
+                            <li class="flex items-start"><span class="mr-2 mt-1">📊</span><span>Data pelanggan berantakan dan tidak terpakai.</span></li>
+                        </ul>
+                    </div>
+                    <!-- After Card -->
+                    <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-green-800 mb-3">✅ Setelah FormulirKilat</h3>
+                         <ul class="space-y-2 text-green-700">
+                            <li class="flex items-start"><span class="mr-2 mt-1">✨</span><span>Satu link untuk semua pesanan, rapi dan profesional.</span></li>
+                            <li class="flex items-start"><span class="mr-2 mt-1">🚀</span><span>Data otomatis masuk ke Google Sheets. Siap diolah!</span></li>
+                            <li class="flex items-start"><span class="mr-2 mt-1">💳</span><span>Terima pembayaran online (GoPay, OVO, dll) secara instan.</span></li>
+                            <li class="flex items-start"><span class="mr-2 mt-1">📈</span><span>Database pelanggan otomatis terbentuk untuk promosi.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================== -->
+        <!-- [FEATURE] - Features List                                              -->
+        <!-- Fitur ini merinci kemampuan utama produk.                            -->
+        <!-- ====================================================================== -->
+        <section id="fitur" class="py-16 sm:py-24 bg-secondary">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                     <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Semua yang Anda Butuhkan untuk Jualan Online</h2>
+                     <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Fitur canggih yang didesain semudah menggunakannya.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Feature Card (Komponen yang dapat digunakan kembali) -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-sky-100 text-primary mb-4">
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" role="img" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Form Builder Intuitif</h3>
+                        <p class="text-gray-600">Buat formulir layaknya e-commerce dengan katalog produk, pilihan ganda, dan upload bukti transfer. Cukup drag & drop.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-sky-100 text-primary mb-4">
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" role="img" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Integrasi Google Sheets</h3>
+                        <p class="text-gray-600">Lupakan rekap manual. Setiap data pesanan baru akan otomatis ditambahkan sebagai baris baru di Google Sheet Anda.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-sky-100 text-primary mb-4">
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" role="img" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 21z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Terima Pembayaran Online</h3>
+                        <p class="text-gray-600">Aktifkan pembayaran via QRIS, GoPay, OVO, transfer bank, dan lainnya. Notifikasi otomatis, tidak perlu cek mutasi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================== -->
+        <!-- [FEATURE] - Pricing Display                                            -->
+        <!-- Fitur ini menampilkan model bisnis dan harga produk.                 -->
+        <!-- ====================================================================== -->
+        <section id="harga" class="py-16 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="text-center mb-12">
+                     <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Harga yang Jujur dan Terjangkau</h2>
+                     <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Mulai gratis, upgrade saat bisnis Anda sudah siap untuk tumbuh lebih pesat.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- Pricing Card (Komponen) -->
+                    <div class="border border-gray-200 rounded-lg p-8">
+                        <h3 class="text-2xl font-bold text-gray-900">Gratis</h3>
+                        <p class="mt-2 text-gray-600">Untuk memulai dan mencoba.</p>
+                        <p class="mt-6 text-4xl font-extrabold text-gray-900">Rp 0</p>
+                        <p class="mt-1 text-gray-600">Selamanya</p>
+                        <a href="#" class="mt-6 block w-full text-center bg-white border border-gray-400 text-gray-700 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100">Mulai Gratis</a>
+                        <ul class="mt-8 space-y-4 text-gray-700">
+                           <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>3 Formulir</li>
+                           <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>100 Data Masuk / Bulan</li>
+                           <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>Integrasi Google Sheets</li>
+                           <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>Semua Jenis Kolom</li>
+                        </ul>
+                    </div>
+                    <div class="border-2 border-primary rounded-lg p-8 relative shadow-xl">
+                        <span class="absolute top-0 -translate-y-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">PALING POPULER</span>
+                        <h3 class="text-2xl font-bold text-primary">Pro</h3>
+                        <p class="mt-2 text-gray-600">Untuk bisnis yang siap tumbuh.</p>
+                        <p class="mt-6 text-4xl font-extrabold text-gray-900">Rp 79rb<span class="text-base font-medium text-gray-600">/bulan</span></p>
+                        <p class="mt-1 text-gray-600">Ditagih tahunan, atau Rp 99rb/bulan</p>
+                        <a href="#" class="mt-6 block w-full text-center bg-primary text-white font-semibold px-6 py-3 rounded-lg hover:bg-primary-hover">Pilih Paket Pro</a>
+                        <ul class="mt-8 space-y-4 text-gray-700">
+                           <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>Semua di paket Gratis, plus:</li>
+                           <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>**Formulir Tak Terbatas**</li>
+                           <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>**2.500 Data Masuk / Bulan**</li>
+                           <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>**Integrasi Payment Gateway**</li>
+                           <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>Hapus Branding "FormulirKilat"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ====================================================================== -->
+        <!-- [FEATURE] - Testimonials / Social Proof                                -->
+        <!-- Fitur ini membangun kepercayaan dengan menunjukkan bukti sosial.       -->
+        <!-- ====================================================================== -->
+        <section id="testimoni" class="py-16 sm:py-24 bg-secondary">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                     <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Apa Kata Mereka yang Sudah Pakai?</h2>
+                     <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Kami bangga bisa menjadi bagian dari pertumbuhan bisnis mereka.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial Card (Komponen) -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <p class="text-gray-700">"FormulirKilat benar-benar mengubah cara saya jualan. Dulu rekap order PO bisa 2 jam sendiri, sekarang semua data masuk otomatis ke G-Sheet. Waktu saya jadi lebih banyak untuk fokus ke produksi!"</p>
+                        <div class="mt-4 flex items-center">
+                            <img class="h-12 w-12 rounded-full object-cover" loading="lazy" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Foto profil Ani">
+                            <div class="ml-4">
+                                <p class="font-bold text-gray-900">Ani</p>
+                                <p class="text-sm text-gray-600">Pemilik, Dapur Mama Ani</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <p class="text-gray-700">"Sebagai penjual di Instagram, link formulir ini sangat profesional. Pelanggan jadi lebih gampang order dan langsung bisa bayar pake QRIS. Ga ada lagi drama 'Kak, udah transfer ya', tapi belum masuk."</p>
+                        <div class="mt-4 flex items-center">
+                            <img class="h-12 w-12 rounded-full object-cover" loading="lazy" src="https://i.pravatar.cc/150?u=a042581f4e29026704e" alt="Foto profil Budi">
+                            <div class="ml-4">
+                                <p class="font-bold text-gray-900">Budi</p>
+                                <p class="text-sm text-gray-600">Owner, Kopi Senja</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <p class="text-gray-700">"Fitur katalog produknya juara! Saya bisa masukkin semua varian hampers Lebaran lengkap dengan harga. Pelanggan tinggal pilih dan isi kuantitas. Praktis banget."</p>
+                        <div class="mt-4 flex items-center">
+                            <img class="h-12 w-12 rounded-full object-cover" loading="lazy" src="https://i.pravatar.cc/150?u=a042581f4e29026704f" alt="Foto profil Citra">
+                            <div class="ml-4">
+                                <p class="font-bold text-gray-900">Citra</p>
+                                <p class="text-sm text-gray-600">Founder, Hampers Ceria</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================== -->
+        <!-- [FEATURE] - Final Call to Action (CTA)                                 -->
+        <!-- Fitur ini memberikan dorongan terakhir bagi pengguna untuk mendaftar.   -->
+        <!-- ====================================================================== -->
+        <section class="py-16 sm:py-24 bg-white">
+             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="bg-primary text-white p-12 rounded-2xl shadow-xl text-center">
+                    <h2 class="text-3xl sm:text-4xl font-bold">Siap Mengubah Cara Anda Berjualan?</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-sky-100">Daftar gratis hari ini dan rasakan kemudahannya. Tidak perlu kartu kredit.</p>
+                    <div class="mt-8">
+                        <a href="#" class="inline-block bg-white text-primary font-bold px-8 py-4 rounded-lg shadow-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-300">
+                           Daftar Gratis Sekarang Juga
+                        </a>
+                    </div>
+                 </div>
+             </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg">FormulirKilat</h3>
+                    <p class="mt-2 text-gray-400 text-sm">Membantu UMKM Indonesia naik kelas melalui digitalisasi.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold">Produk</h4>
+                    <ul class="mt-2 space-y-2 text-sm">
+                        <li><a href="#fitur" class="text-gray-400 hover:text-white">Fitur</a></li>
+                        <li><a href="#harga" class="text-gray-400 hover:text-white">Harga</a></li>
+                        <li><a href="#testimoni" class="text-gray-400 hover:text-white">Testimoni</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold">Perusahaan</h4>
+                    <ul class="mt-2 space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tentang Kami</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Kontak</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold">Legal</h4>
+                    <ul class="mt-2 space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Kebijakan Privasi</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-sm text-gray-400">
+                <p>&copy; 2025 FormulirKilat. Semua Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PERBAIKAN: Menghapus atribut 'defer' yang tidak valid di beberapa environment -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', function () {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Tutup menu saat link di klik
+            const menuLinks = mobileMenu.querySelectorAll('a');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
